@@ -1,9 +1,9 @@
 {
   "name": "@lynx-sdk/react",
   "version": "0.0.0-semantic-release",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "license": "MIT",
   "homepage": "https://github.com/jiaqi-ienyan/lynx-react",
   "repository": {
@@ -39,7 +39,8 @@
     "@lynx-sdk/helpers": "jiaqi-ienyan/lynx-helpers#main",
     "swr": "^1.0.1",
     "tiny-invariant": "^1.1.0",
-    "tiny-warning": "^1.0.3"
+    "tiny-warning": "^1.0.3",
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "@ethersproject/bignumber": "5",
