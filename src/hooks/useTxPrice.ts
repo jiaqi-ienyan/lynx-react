@@ -1,46 +1,40 @@
-import { BigNumber, BigNumberish } from '@ethersproject/bignumber';
-import { WeiPerEther } from '@ethersproject/constants';
-import { divide } from '@lido-sdk/helpers';
-import { useCallback, useMemo } from 'react';
-import { useEthereumSWR } from './useEthereumSWR';
-import { useEthPrice } from './useEthPrice';
-import { SWRResponse } from './useLidoSWR';
+import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
+import { WeiPerEther } from '@ethersproject/constants'
+import { divide } from '@lynx-sdk/helpers'
+import { useCallback, useMemo } from 'react'
+import { useEthereumSWR } from './useEthereumSWR'
+import { useEthPrice } from './useEthPrice'
+import { SWRResponse } from './useLidoSWR'
 
-const getTxPrice = (
-  gasLimit: BigNumberish,
-  ethPrice?: number,
-  gasPrice?: BigNumber,
-) => {
+const getTxPrice = (gasLimit: BigNumberish, ethPrice?: number, gasPrice?: BigNumber) => {
   if (!gasLimit || ethPrice == null || gasPrice == null) {
-    return undefined;
+    return undefined
   }
 
-  const txCostInWei = gasPrice.mul(BigNumber.from(gasLimit));
-  const txCostInEth = divide(txCostInWei, WeiPerEther);
+  const txCostInWei = gasPrice.mul(BigNumber.from(gasLimit))
+  const txCostInEth = divide(txCostInWei, WeiPerEther)
 
-  return ethPrice * txCostInEth;
-};
+  return ethPrice * txCostInEth
+}
 
-export const useTxPrice = (
-  gasLimit: BigNumberish,
-): Omit<SWRResponse<number>, 'mutate'> => {
-  const eth = useEthPrice();
-  const gas = useEthereumSWR({ method: 'getGasPrice' });
+export const useTxPrice = (gasLimit: BigNumberish): Omit<SWRResponse<number>, 'mutate'> => {
+  const eth = useEthPrice()
+  const gas = useEthereumSWR({ method: 'getGasPrice' })
 
-  const ethPrice = eth.data;
-  const gasPrice = gas.data;
+  const ethPrice = eth.data
+  const gasPrice = gas.data
 
   const data = useMemo(() => {
-    return getTxPrice(gasLimit, ethPrice, gasPrice);
-  }, [gasLimit, ethPrice, gasPrice]);
+    return getTxPrice(gasLimit, ethPrice, gasPrice)
+  }, [gasLimit, ethPrice, gasPrice])
 
-  const updateEth = eth.update;
-  const updateGas = gas.update;
+  const updateEth = eth.update
+  const updateGas = gas.update
 
   const update = useCallback(async () => {
-    const [ethPrice, gasPrice] = await Promise.all([updateEth(), updateGas()]);
-    return getTxPrice(gasLimit, ethPrice, gasPrice);
-  }, [gasLimit, updateEth, updateGas]);
+    const [ethPrice, gasPrice] = await Promise.all([updateEth(), updateGas()])
+    return getTxPrice(gasLimit, ethPrice, gasPrice)
+  }, [gasLimit, updateEth, updateGas])
 
   return {
     update,
@@ -52,13 +46,13 @@ export const useTxPrice = (
      */
 
     get loading() {
-      return eth.loading || gas.loading;
+      return eth.loading || gas.loading
     },
     get initialLoading() {
-      return eth.initialLoading || gas.initialLoading;
+      return eth.initialLoading || gas.initialLoading
     },
     get error() {
-      return eth.error || gas.error;
+      return eth.error || gas.error
     },
-  };
-};
+  }
+}

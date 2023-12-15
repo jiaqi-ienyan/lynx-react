@@ -1,30 +1,27 @@
-import { getERC20Contract } from '@lido-sdk/contracts';
-import { useCallback } from 'react';
-import { useSDK } from './useSDK';
-import { useMountedState } from './useMountedState';
+import { getERC20Contract } from '@lynx-sdk/contracts'
+import { useCallback } from 'react'
+import { useSDK } from './useSDK'
+import { useMountedState } from './useMountedState'
 
 export const useTokenToWallet = (
   address: string,
-  image?: string,
+  image?: string
 ): {
-  addToken?: () => Promise<boolean>;
-  loading: boolean;
+  addToken?: () => Promise<boolean>
+  loading: boolean
 } => {
-  const [loading, setLoading] = useMountedState(false);
-  const { providerRpc, providerWeb3, onError } = useSDK();
+  const [loading, setLoading] = useMountedState(false)
+  const { providerRpc, providerWeb3, onError } = useSDK()
 
   const handleAdd = useCallback(async () => {
-    const provider = providerWeb3?.provider;
-    if (!provider?.request) return false;
+    const provider = providerWeb3?.provider
+    if (!provider?.request) return false
 
     try {
-      setLoading(true);
-      const contract = getERC20Contract(address, providerRpc);
+      setLoading(true)
+      const contract = getERC20Contract(address, providerRpc)
 
-      const [symbol, decimals] = await Promise.all([
-        contract.symbol(),
-        contract.decimals(),
-      ]);
+      const [symbol, decimals] = await Promise.all([contract.symbol(), contract.decimals()])
 
       const result = await provider.request({
         method: 'wallet_watchAsset',
@@ -38,22 +35,22 @@ export const useTokenToWallet = (
           },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } as any,
-      });
+      })
 
-      return !!result;
+      return !!result
     } catch (error) {
-      onError(error);
-      return false;
+      onError(error)
+      return false
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [address, image, providerWeb3, providerRpc, setLoading, onError]);
+  }, [address, image, providerWeb3, providerRpc, setLoading, onError])
 
-  const canAdd = !!providerWeb3?.provider.isMetaMask;
-  const addToken = canAdd ? handleAdd : undefined;
+  const canAdd = !!providerWeb3?.provider.isMetaMask
+  const addToken = canAdd ? handleAdd : undefined
 
   return {
     addToken,
     loading,
-  };
-};
+  }
+}
