@@ -1,5 +1,5 @@
-import invariant from 'tiny-invariant'
-import warning from 'tiny-warning'
+import * as invariant from 'tiny-invariant'
+import * as warning from 'tiny-warning'
 import { useEffect } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { getERC20Contract } from '@lynx-sdk/contracts'

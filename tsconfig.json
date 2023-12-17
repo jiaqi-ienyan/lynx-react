@@ -10,11 +10,9 @@
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "module": "esnext",
     "jsx": "react-jsx",
-    "target": "es6",
     "outDir": "dist"
   },
-  "include": ["**/src/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }

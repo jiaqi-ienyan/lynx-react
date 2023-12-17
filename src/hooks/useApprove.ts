@@ -1,4 +1,4 @@
-import invariant from 'tiny-invariant'
+import * as invariant from 'tiny-invariant'
 import { useCallback } from 'react'
 import { ContractTransaction, ContractReceipt } from '@ethersproject/contracts'
 import { BigNumber } from '@ethersproject/bignumber'

@@ -1,5 +1,5 @@
-import warning from 'tiny-warning'
-import invariant from 'tiny-invariant'
+import * as warning from 'tiny-warning'
+import * as invariant from 'tiny-invariant'
 import { useCallback, useEffect } from 'react'
 import { SWRConfiguration } from 'swr'
 import { CHAINS } from '@lynx-sdk/constants'

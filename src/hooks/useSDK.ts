@@ -1,9 +1,9 @@
-import { useContext } from 'react';
-import { SDKContext, SDKContextValue } from '../context';
-import invariant from 'tiny-invariant';
+import { useContext } from 'react'
+import { SDKContext, SDKContextValue } from '../context'
+import * as invariant from 'tiny-invariant'
 
 export const useSDK = (): SDKContextValue => {
-  const contextValue = useContext(SDKContext);
-  invariant(contextValue, 'useSDK was used outside of SDKContext');
-  return contextValue;
-};
+  const contextValue = useContext(SDKContext)
+  invariant(contextValue, 'useSDK was used outside of SDKContext')
+  return contextValue
+}
