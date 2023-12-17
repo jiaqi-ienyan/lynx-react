@@ -275,25 +275,25 @@
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/strings" "^5.7.0"
 
-"@lynx-sdk/constants@jiaqi-ienyan/lynx-constants#main":
+"@lynx-sdk/constants@git+https://github.com/jiaqi-ienyan/lynx-constants.git":
   version "0.0.0-semantic-release"
-  resolved "https://codeload.github.com/jiaqi-ienyan/lynx-constants/tar.gz/6df1f7e7c1e811eb9af650afcd883e53f33abce2"
+  resolved "git+https://github.com/jiaqi-ienyan/lynx-constants.git#6df1f7e7c1e811eb9af650afcd883e53f33abce2"
   dependencies:
     tiny-invariant "^1.1.0"
     typescript "^5.3.3"
 
-"@lynx-sdk/contracts@jiaqi-ienyan/lynx-contracts#main":
+"@lynx-sdk/contracts@git+https://github.com/jiaqi-ienyan/lynx-contracts.git":
   version "0.0.0-semantic-release"
-  resolved "https://codeload.github.com/jiaqi-ienyan/lynx-contracts/tar.gz/61166f98eccd89debc618826b28b1a6d8cc7cd2a"
+  resolved "git+https://github.com/jiaqi-ienyan/lynx-contracts.git#f23e974f2f1ff8bf9acc61ee0de21255a7c15933"
   dependencies:
-    "@lynx-sdk/constants" jiaqi-ienyan/lynx-constants#main
+    "@lynx-sdk/constants" "git+https://github.com/jiaqi-ienyan/lynx-constants.git"
     tiny-invariant "^1.1.0"
 
-"@lynx-sdk/helpers@jiaqi-ienyan/lynx-helpers#main":
+"@lynx-sdk/helpers@git+https://github.com/jiaqi-ienyan/lynx-helpers.git":
   version "0.0.0-semantic-release"
-  resolved "https://codeload.github.com/jiaqi-ienyan/lynx-helpers/tar.gz/82773f567c2a5f5d84bbbcf1682e1804baa92563"
+  resolved "git+https://github.com/jiaqi-ienyan/lynx-helpers.git#106a4945aee73fd16e94d9b3cbe1d96e471d15fa"
   dependencies:
-    "@lynx-sdk/constants" jiaqi-ienyan/lynx-constants#main
+    "@lynx-sdk/constants" "git+https://github.com/jiaqi-ienyan/lynx-constants.git"
     tiny-invariant "^1.1.0"
     typescript "^5.3.3"
 
