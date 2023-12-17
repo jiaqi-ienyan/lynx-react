@@ -1,19 +1,4 @@
-"use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
+import { useLidoSWR } from './useLidoSWR';
+export const useLidoSWRImmutable = (key, fetcher, config) => {
+    return useLidoSWR(key, fetcher, Object.assign({ revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false }, config));
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.useLidoSWRImmutable = void 0;
-var useLidoSWR_1 = require("./useLidoSWR");
-var useLidoSWRImmutable = function (key, fetcher, config) {
-    return (0, useLidoSWR_1.useLidoSWR)(key, fetcher, __assign({ revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false }, config));
-};
-exports.useLidoSWRImmutable = useLidoSWRImmutable;

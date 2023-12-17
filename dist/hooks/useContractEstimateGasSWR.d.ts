@@ -4,9 +4,9 @@ import { SWRResponse } from './useLidoSWR';
 import { FilterAsyncMethods } from './types';
 import { SWRConfiguration } from 'swr';
 export declare const useContractEstimateGasSWR: <C extends BaseContract, M extends FilterAsyncMethods<C["estimateGas"]>, F extends boolean>(props: {
-    contract?: C;
+    contract?: C | undefined;
     method: M;
-    shouldFetch?: F;
-    params?: F extends false ? unknown[] : Parameters<C["estimateGas"][M]>;
-    config?: SWRConfiguration<BigNumber, Error>;
+    shouldFetch?: F | undefined;
+    params?: (F extends false ? unknown[] : Parameters<C["estimateGas"][M]>) | undefined;
+    config?: Partial<import("swr/dist/types").PublicConfiguration<BigNumber, Error, import("swr").BareFetcher<any>>> | undefined;
 }) => SWRResponse<BigNumber, Error>;

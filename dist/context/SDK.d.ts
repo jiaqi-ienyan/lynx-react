@@ -22,6 +22,6 @@ export interface SDKContextValue {
     account?: string;
     onError: (error: unknown) => void;
 }
-export declare const SDKContext: import("react").Context<SDKContextValue>;
+export declare const SDKContext: import("react").Context<SDKContextValue | null>;
 declare const _default: import("react").MemoExoticComponent<FC<SDKContextProps>>;
 export default _default;

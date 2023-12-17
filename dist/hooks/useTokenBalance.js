@@ -1,44 +1,40 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.useTokenBalance = void 0;
-var tiny_invariant_1 = require("tiny-invariant");
-var tiny_warning_1 = require("tiny-warning");
-var react_1 = require("react");
-var contracts_1 = require("@lynx-sdk/contracts");
-var useContractSWR_1 = require("./useContractSWR");
-var useSDK_1 = require("./useSDK");
-var useDebounceCallback_1 = require("./useDebounceCallback");
-var useTokenBalance = function (token, account, config) {
-    var _a = (0, useSDK_1.useSDK)(), providerRpc = _a.providerRpc, providerWeb3 = _a.providerWeb3, sdkAccount = _a.account;
-    var mergedAccount = account !== null && account !== void 0 ? account : sdkAccount;
-    (0, tiny_invariant_1.default)(token != null, 'Token is required');
-    var contractRpc = (0, contracts_1.getERC20Contract)(token, providerRpc);
-    var contractWeb3 = providerWeb3 ? (0, contracts_1.getERC20Contract)(token, providerWeb3) : null;
-    var result = (0, useContractSWR_1.useContractSWR)({
+import invariant from 'tiny-invariant';
+import warning from 'tiny-warning';
+import { useEffect } from 'react';
+import { getERC20Contract } from '@lynx-sdk/contracts';
+import { useContractSWR } from './useContractSWR';
+import { useSDK } from './useSDK';
+import { useDebounceCallback } from './useDebounceCallback';
+export const useTokenBalance = (token, account, config) => {
+    const { providerRpc, providerWeb3, account: sdkAccount } = useSDK();
+    const mergedAccount = account !== null && account !== void 0 ? account : sdkAccount;
+    invariant(token != null, 'Token is required');
+    const contractRpc = getERC20Contract(token, providerRpc);
+    const contractWeb3 = providerWeb3 ? getERC20Contract(token, providerWeb3) : null;
+    const result = useContractSWR({
         shouldFetch: !!mergedAccount,
         contract: contractRpc,
         method: 'balanceOf',
         params: [mergedAccount],
-        config: config,
+        config,
     });
-    var updateBalanceDebounced = (0, useDebounceCallback_1.useDebounceCallback)(result.update, 1000);
-    (0, react_1.useEffect)(function () {
+    const updateBalanceDebounced = useDebounceCallback(result.update, 1000);
+    useEffect(() => {
         if (!mergedAccount || !providerWeb3 || !contractWeb3)
             return;
         try {
-            var fromMe_1 = contractWeb3.filters.Transfer(mergedAccount, null);
-            var toMe_1 = contractWeb3.filters.Transfer(null, mergedAccount);
-            providerWeb3.on(fromMe_1, updateBalanceDebounced);
-            providerWeb3.on(toMe_1, updateBalanceDebounced);
-            return function () {
-                providerWeb3.off(fromMe_1, updateBalanceDebounced);
-                providerWeb3.off(toMe_1, updateBalanceDebounced);
+            const fromMe = contractWeb3.filters.Transfer(mergedAccount, null);
+            const toMe = contractWeb3.filters.Transfer(null, mergedAccount);
+            providerWeb3.on(fromMe, updateBalanceDebounced);
+            providerWeb3.on(toMe, updateBalanceDebounced);
+            return () => {
+                providerWeb3.off(fromMe, updateBalanceDebounced);
+                providerWeb3.off(toMe, updateBalanceDebounced);
             };
         }
         catch (error) {
-            return (0, tiny_warning_1.default)(false, 'Cannot subscribe to events');
+            return warning(false, 'Cannot subscribe to events');
         }
     }, [providerWeb3, contractWeb3, mergedAccount, updateBalanceDebounced]);
     return result;
 };
-exports.useTokenBalance = useTokenBalance;
