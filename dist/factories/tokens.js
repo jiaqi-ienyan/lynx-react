@@ -1,49 +1,53 @@
-import { TOKENS, getTokenAddress } from '@lynx-sdk/constants';
-import { useAllowance, useDecimals, useSDK, useTokenBalance, useTotalSupply, useApprove, } from '../hooks';
-export const hooksFactory = (getTokenAddress) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useLDOApprove = exports.useLDOAllowance = exports.useLDODecimals = exports.useLDOTotalSupply = exports.useLDOBalance = exports.useSTETHApprove = exports.useSTETHAllowance = exports.useSTETHDecimals = exports.useSTETHTotalSupply = exports.useSTETHBalance = exports.useWSTETHApprove = exports.useWSTETHAllowance = exports.useWSTETHDecimals = exports.useWSTETHTotalSupply = exports.useWSTETHBalance = exports.hooksFactory = void 0;
+var constants_1 = require("@lynx-sdk/constants");
+var hooks_1 = require("../hooks");
+var hooksFactory = function (getTokenAddress) {
     return {
-        useTokenBalance: () => {
-            const { chainId } = useSDK();
-            const tokenAddress = getTokenAddress(chainId);
-            return useTokenBalance(tokenAddress);
+        useTokenBalance: function () {
+            var chainId = (0, hooks_1.useSDK)().chainId;
+            var tokenAddress = getTokenAddress(chainId);
+            return (0, hooks_1.useTokenBalance)(tokenAddress);
         },
-        useTotalSupply: () => {
-            const { chainId } = useSDK();
-            const tokenAddress = getTokenAddress(chainId);
-            return useTotalSupply(tokenAddress);
+        useTotalSupply: function () {
+            var chainId = (0, hooks_1.useSDK)().chainId;
+            var tokenAddress = getTokenAddress(chainId);
+            return (0, hooks_1.useTotalSupply)(tokenAddress);
         },
-        useDecimals: () => {
-            const { chainId } = useSDK();
-            const tokenAddress = getTokenAddress(chainId);
-            return useDecimals(tokenAddress);
+        useDecimals: function () {
+            var chainId = (0, hooks_1.useSDK)().chainId;
+            var tokenAddress = getTokenAddress(chainId);
+            return (0, hooks_1.useDecimals)(tokenAddress);
         },
-        useAllowance: (spender) => {
-            const { chainId } = useSDK();
-            const tokenAddress = getTokenAddress(chainId);
-            return useAllowance(tokenAddress, spender);
+        useAllowance: function (spender) {
+            var chainId = (0, hooks_1.useSDK)().chainId;
+            var tokenAddress = getTokenAddress(chainId);
+            return (0, hooks_1.useAllowance)(tokenAddress, spender);
         },
-        useApprove: (amount, spender, wrapper) => {
-            const { chainId, account } = useSDK();
-            const tokenAddress = getTokenAddress(chainId);
-            return useApprove(amount, tokenAddress, spender, account, wrapper);
+        useApprove: function (amount, spender, wrapper) {
+            var _a = (0, hooks_1.useSDK)(), chainId = _a.chainId, account = _a.account;
+            var tokenAddress = getTokenAddress(chainId);
+            return (0, hooks_1.useApprove)(amount, tokenAddress, spender, account, wrapper);
         },
     };
 };
-const wsteth = hooksFactory(chainId => getTokenAddress(chainId, TOKENS.WSTETH));
-export const useWSTETHBalance = wsteth.useTokenBalance;
-export const useWSTETHTotalSupply = wsteth.useTotalSupply;
-export const useWSTETHDecimals = wsteth.useDecimals;
-export const useWSTETHAllowance = wsteth.useAllowance;
-export const useWSTETHApprove = wsteth.useApprove;
-const steth = hooksFactory(chainId => getTokenAddress(chainId, TOKENS.STETH));
-export const useSTETHBalance = steth.useTokenBalance;
-export const useSTETHTotalSupply = steth.useTotalSupply;
-export const useSTETHDecimals = steth.useDecimals;
-export const useSTETHAllowance = steth.useAllowance;
-export const useSTETHApprove = steth.useApprove;
-const ldo = hooksFactory(chainId => getTokenAddress(chainId, TOKENS.LDO));
-export const useLDOBalance = ldo.useTokenBalance;
-export const useLDOTotalSupply = ldo.useTotalSupply;
-export const useLDODecimals = ldo.useDecimals;
-export const useLDOAllowance = ldo.useAllowance;
-export const useLDOApprove = ldo.useApprove;
+exports.hooksFactory = hooksFactory;
+var wsteth = (0, exports.hooksFactory)(function (chainId) { return (0, constants_1.getTokenAddress)(chainId, constants_1.TOKENS.WSTETH); });
+exports.useWSTETHBalance = wsteth.useTokenBalance;
+exports.useWSTETHTotalSupply = wsteth.useTotalSupply;
+exports.useWSTETHDecimals = wsteth.useDecimals;
+exports.useWSTETHAllowance = wsteth.useAllowance;
+exports.useWSTETHApprove = wsteth.useApprove;
+var steth = (0, exports.hooksFactory)(function (chainId) { return (0, constants_1.getTokenAddress)(chainId, constants_1.TOKENS.STETH); });
+exports.useSTETHBalance = steth.useTokenBalance;
+exports.useSTETHTotalSupply = steth.useTotalSupply;
+exports.useSTETHDecimals = steth.useDecimals;
+exports.useSTETHAllowance = steth.useAllowance;
+exports.useSTETHApprove = steth.useApprove;
+var ldo = (0, exports.hooksFactory)(function (chainId) { return (0, constants_1.getTokenAddress)(chainId, constants_1.TOKENS.LDO); });
+exports.useLDOBalance = ldo.useTokenBalance;
+exports.useLDOTotalSupply = ldo.useTotalSupply;
+exports.useLDODecimals = ldo.useDecimals;
+exports.useLDOAllowance = ldo.useAllowance;
+exports.useLDOApprove = ldo.useApprove;

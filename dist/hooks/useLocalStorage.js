@@ -1,30 +1,33 @@
-import { useCallback, useEffect, useState, } from 'react';
-import warning from 'tiny-warning';
-export const useLocalStorage = (key, initialValue) => {
-    const readValue = useCallback(() => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.useLocalStorage = void 0;
+var react_1 = require("react");
+var tiny_warning_1 = require("tiny-warning");
+var useLocalStorage = function (key, initialValue) {
+    var readValue = (0, react_1.useCallback)(function () {
         try {
-            const item = window.localStorage.getItem(key);
+            var item = window.localStorage.getItem(key);
             return item ? JSON.parse(item) : initialValue;
         }
         catch (error) {
-            warning(typeof window === 'undefined', `Error reading localStorage key "${key}"`);
+            (0, tiny_warning_1.default)(typeof window === 'undefined', "Error reading localStorage key \"".concat(key, "\""));
             return initialValue;
         }
     }, [initialValue, key]);
-    const [storedValue, setStoredValue] = useState(readValue);
-    const saveToStorage = useCallback((newValue) => {
+    var _a = (0, react_1.useState)(readValue), storedValue = _a[0], setStoredValue = _a[1];
+    var saveToStorage = (0, react_1.useCallback)(function (newValue) {
         try {
             window.localStorage.setItem(key, JSON.stringify(newValue));
             window.dispatchEvent(new Event('local-storage'));
         }
         catch (error) {
-            warning(typeof window === 'undefined', `Error setting localStorage key "${key}"`);
+            (0, tiny_warning_1.default)(typeof window === 'undefined', "Error setting localStorage key \"".concat(key, "\""));
         }
     }, [key]);
-    const setValue = useCallback((value) => {
+    var setValue = (0, react_1.useCallback)(function (value) {
         if (value instanceof Function) {
-            setStoredValue((current) => {
-                const newValue = value(current);
+            setStoredValue(function (current) {
+                var newValue = value(current);
                 saveToStorage(newValue);
                 return newValue;
             });
@@ -34,19 +37,20 @@ export const useLocalStorage = (key, initialValue) => {
             setStoredValue(value);
         }
     }, [saveToStorage]);
-    useEffect(() => {
+    (0, react_1.useEffect)(function () {
         setStoredValue(readValue());
     }, [readValue]);
-    useEffect(() => {
-        const handleStorageChange = () => {
+    (0, react_1.useEffect)(function () {
+        var handleStorageChange = function () {
             setStoredValue(readValue());
         };
         window.addEventListener('storage', handleStorageChange);
         window.addEventListener('local-storage', handleStorageChange);
-        return () => {
+        return function () {
             window.removeEventListener('storage', handleStorageChange);
             window.removeEventListener('local-storage', handleStorageChange);
         };
     }, [readValue]);
     return [storedValue, setValue];
 };
+exports.useLocalStorage = useLocalStorage;

@@ -8,4 +8,4 @@ export type SWRResponse<Data, Error = unknown> = {
     loading: boolean;
     initialLoading: boolean;
 };
-export declare const useLidoSWR: <Data = unknown, Error_1 = unknown>(key: Key | null, fetcher: Fetcher<Data> | null, config?: Partial<import("swr/dist/types").PublicConfiguration<Data, Error_1, import("swr").BareFetcher<any>>> | undefined) => SWRResponse<Data, Error_1>;
+export declare const useLidoSWR: <Data = unknown, Error_1 = unknown>(key: Key | null, fetcher: Fetcher<Data>, config?: Partial<import("swr/dist/types").PublicConfiguration<Data, Error_1, import("swr").BareFetcher<any>>>) => SWRResponse<Data, Error_1>;

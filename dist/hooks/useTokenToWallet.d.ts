@@ -1,4 +1,4 @@
 export declare const useTokenToWallet: (address: string, image?: string) => {
-    addToken?: (() => Promise<boolean>) | undefined;
+    addToken?: () => Promise<boolean>;
     loading: boolean;
 };

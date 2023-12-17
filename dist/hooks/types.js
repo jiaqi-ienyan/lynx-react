@@ -1,3 +1,4 @@
+"use strict";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/ban-types */
-export {};
+Object.defineProperty(exports, "__esModule", { value: true });

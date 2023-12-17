@@ -5,7 +5,7 @@ import { SWRConfiguration } from 'swr';
 export declare const useContractSWR: <C extends BaseContract, M extends FilterAsyncMethods<C>, R extends UnpackedPromise<ReturnType<C[M]>>, F extends boolean>(props: {
     contract: C;
     method: M;
-    shouldFetch?: F | undefined;
-    params?: (F extends false ? unknown[] : Parameters<C[M]>) | undefined;
-    config?: Partial<import("swr/dist/types").PublicConfiguration<R, Error, import("swr").BareFetcher<any>>> | undefined;
+    shouldFetch?: F;
+    params?: F extends false ? unknown[] : Parameters<C[M]>;
+    config?: Partial<import("swr/dist/types").PublicConfiguration<R, Error, import("swr").BareFetcher<any>>>;
 }) => SWRResponse<R, Error>;
