@@ -1,4 +1,4 @@
-import { getERC20Contract } from '@lynx-sdk/contracts'
+import { getERC20Contract } from '@lido-sdk/contracts'
 import { useCallback } from 'react'
 import { useSDK } from './useSDK'
 import { useMountedState } from './useMountedState'

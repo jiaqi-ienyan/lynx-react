@@ -1,8 +1,8 @@
 import { SWRConfiguration } from 'swr'
 import { BigNumber } from '@ethersproject/bignumber'
-import { getAggregatorContract } from '@lynx-sdk/contracts'
-import { getAggregatorAddress, CHAINS } from '@lynx-sdk/constants'
-import { divide } from '@lynx-sdk/helpers'
+import { getAggregatorContract } from '@lido-sdk/contracts'
+import { getAggregatorAddress, CHAINS } from '@lido-sdk/constants'
+import { divide } from '@lido-sdk/helpers'
 import { useSDK } from './useSDK'
 import { SWRResponse, useLidoSWR } from './useLidoSWR'
 

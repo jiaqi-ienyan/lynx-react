@@ -1,5 +1,5 @@
 import { BaseContract } from '@ethersproject/contracts'
-import { TOKENS, CHAINS, getTokenAddress, getWithdrawalQueueAddress } from '@lynx-sdk/constants'
+import { TOKENS, CHAINS, getTokenAddress, getWithdrawalQueueAddress } from '@lido-sdk/constants'
 import {
   WstethAbiFactory,
   StethAbiFactory,
@@ -7,7 +7,7 @@ import {
   Factory,
   createContractGetter,
   WithdrawalQueueAbiFactory,
-} from '@lynx-sdk/contracts'
+} from '@lido-sdk/contracts'
 import { useMemo } from 'react'
 import { useSDK } from '../hooks'
 

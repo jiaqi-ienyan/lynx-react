@@ -1,5 +1,5 @@
 import * as invariant from 'tiny-invariant'
-import { CHAINS } from '@lynx-sdk/constants'
+import { CHAINS } from '@lido-sdk/constants'
 import { BaseProvider, Web3Provider, getDefaultProvider, getNetwork } from '@ethersproject/providers'
 import { createContext, memo, useMemo, FC } from 'react'
 import { SWRConfiguration } from 'swr'

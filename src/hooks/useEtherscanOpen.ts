@@ -1,4 +1,4 @@
-import { getEtherscanLink, EtherscanEntities, openWindow } from '@lynx-sdk/helpers'
+import { getEtherscanLink, EtherscanEntities, openWindow } from '@lido-sdk/helpers'
 import { useCallback } from 'react'
 import { useSDK } from './useSDK'
 

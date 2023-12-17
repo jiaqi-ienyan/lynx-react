@@ -1,6 +1,6 @@
 import { BigNumber, BigNumberish } from '@ethersproject/bignumber'
 import { WeiPerEther } from '@ethersproject/constants'
-import { divide } from '@lynx-sdk/helpers'
+import { divide } from '@lido-sdk/helpers'
 import { useCallback, useMemo } from 'react'
 import { useEthereumSWR } from './useEthereumSWR'
 import { useEthPrice } from './useEthPrice'
